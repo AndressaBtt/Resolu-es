@@ -1,32 +1,22 @@
-# Solicita o número N do usuário
-N = int(input("Digite um número inteiro N: "))
+def imprimir_piramide(N, crescente=True):
+    for i in range(1, N + 1):
+        # Calcular os espaços para o alinhamento da pirâmide
+        espacos = " " * (N - i)
+        
+        # Criar a lista de números para a linha
+        if crescente:
+            # Números crescentes
+            numeros = list(range(1, i + 1))
+        else:
+            # Números decrescentes
+            numeros = list(range(i, 0, -1))
+        
+        # Imprimir a linha com os espaços e os números
+        print(espacos + " ".join(map(str, numeros)))
 
-# Função para verificar se um número é primo
-def eh_primo(num):
-    if num < 2:
-        return False
-    for i in range(2, int(num**0.5) + 1):
-        if num % i == 0:
-            return False
-    return True
+# Solicitar o número N ao usuário
+N = int(input("Digite o número N (altura da pirâmide): "))
+crescente = input("Deseja uma pirâmide crescente (sim ou não)? ").strip().lower() == "sim"
 
-# Função para exibir a pirâmide de números primos
-def piramide_primos(N, crescente=True):
-    # Lista para armazenar os números primos
-    primos = [num for num in range(1, N + 1) if eh_primo(num)]
-    
-    # Ordena os números primos em ordem crescente ou decrescente
-    if not crescente:
-        primos = primos[::-1]
-
-    # Construção da pirâmide
-    linhas = 1
-    index = 0
-    while index < len(primos):
-        # Exibe a linha atual da pirâmide
-        print(" ".join(map(str, primos[index:index + linhas])))
-        index += linhas
-        linhas += 1
-
-# Chama a função para exibir a pirâmide de números primos
-piramide_primos(N, crescente=True)  
+# Imprimir a pirâmide com o parâmetro crescente
+imprimir_piramide(N, crescente)
